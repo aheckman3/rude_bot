@@ -1,7 +1,6 @@
 import requests
 
-with open("key.txt") as f:
-    API_KEY = f.read().strip()
+BACKEND_URL = "https://rude-backend.onrender.com"
 
 def ask_groq(prompt):
     try:
