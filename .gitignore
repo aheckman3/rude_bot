@@ -1,0 +1,12 @@
+# Secrets
+key.txt
+
+# Python cache
+__pycache__/
+
+# Build artifacts
+build/
+dist/
+chat_gui.spec
+*.exe
+*.pyc
