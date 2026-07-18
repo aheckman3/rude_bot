@@ -1,12 +1,13 @@
 import requests
 
-BACKEND_URL = "https://rude-backend.onrender.com"
+BACKEND_URL = "https://rude-backend.onrender.com/chat"
 
 def ask_groq(prompt):
     try:
         response = requests.post(
             BACKEND_URL,
             json={"message": prompt},
+            headers={"Content-Type": "application/json"},
             timeout=30
         )
         data = response.json()
