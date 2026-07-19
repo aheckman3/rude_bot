@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>RudeBot Web</title>
+        <style>
+            body {
+                background: #111;
+                color:#eee;
+                font-family: Arial, sans-serif;
+                max-width: 600px;
+                margin: 40px auto;
+            }
+            #log {
+                border: 1px solid #444;
+                padding: 10px;
+                height: 300px;
+                overflow-y: auto;
+                background: #222;
+            }
+            .user { color: #4fc3f7; margin: 8px 0; }
+            .bot { color: #f06292; margin: 8px 0; }
+            input {
+                width: 100%;
+                padding: 10px;
+                margin-top: 10px;
+                background: #333;
+                color: #eee;
+                border: 1px solid #555;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>RudeBot Web</h1>
+
+        <div id="log"></div>
+
+        <input id="msg" placeholder="Say something..." autocomplete="off">
+
+        <script>
+            const backend = "https://rude-backend.onrender.com/chat";
+
+            const log = document.getElementById("log");
+            const msg = document.getElementById("msg");
+
+            msg.addEventListener("keydown", async (e) => {
+                if (e.key === "Enter") {
+                    const text = msg.value.trim();
+                    if (!text) return;
+
+                    log.innerHTML += `<div class="user">You: ${text}</div>`;
+                    msg.value = "";
+
+                    const res = await fetch(backend, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ message: text })
+                    });
+
+                    const data = await res.json();
+                    log.innerHTML += `<div class="bot">Bot: ${data.reply}</div>`;
+                    log.scrollTop = log.scrollHeight;
+                }
+            });
+        </script>
+    </body>
+</html>
