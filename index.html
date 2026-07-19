@@ -119,6 +119,7 @@
             </div>
         </div>
         <script>
+            const sessionId = crypto.randomUUID();
             const backend = "https://rude-backend.onrender.com/chat";
 
             const log = document.getElementById("log");
@@ -139,7 +140,7 @@
                     const res = await fetch(backend, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ message: text })
+                        body: JSON.stringify({ message: text, session: sessionId })
                     });
 
                     const data = await res.json();
