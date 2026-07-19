@@ -4,14 +4,20 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>RudeBot Web</title>
+
         <style>
             body {
                 background: #111;
                 color:#eee;
                 font-family: Arial, sans-serif;
-                max-width: 600px;
-                margin: 40px auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 0;
+                padding: 40px 0;
             }
+
+
             #log {
                 border: 1px solid #444;
                 padding: 10px;
@@ -24,32 +30,37 @@
             .bot { color: #f06292; margin: 8px 0; }
             input {
                 width: 100%;
-                padding: 10px;
-                margin-top: 10px;
-                background: #333;
+                padding: 14px;
+                background: #222;
                 color: #eee;
-                border: 1px solid #555;
+                border: none;
+                border-radius: 8px;
+                font-size: 16px;
+                outline: none;
+                box-shadow: 0 0 10px rgba(0,0,0,0.4)
             }
             .chat {
                 display: flex;
                 margin: 10px 0;
             }
             .user-bubble {
-                background: #4fc3f7;
+                background: #3ea8ff;
                 color: #000;
-                padding: 10px;
-                border-radius: 10px;
+                padding: 12px 16px;
+                border-radius: 16px;
                 max-width: 75%;
                 margin-left: auto;
+                font-size: 15px;
             }
 
             .bot-bubble {
-                background: #f06292;
+                background: #ff7aa2;
                 color: #000;
-                padding: 10px;
-                border-radius: 10px;
+                padding: 12px 16px;
+                border-radius: 16px;
                 max-width: 75%;
                 margin-right: auto;
+                font-size: 15px;
             }
             .typing {
                 color: #888;
@@ -57,31 +68,55 @@
                 margin: 5px 0;
             }
             #input-container {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                background: #111;
-                padding: 10px;
-                border-top: 1px solid #333;
+                margin-top: 10px;
+                width: 100%;
+                max-width: 570px;
             }
             header {
-                background: #222;
-                padding: 15px;
+                background: #1a1a1a;
+                padding: 20px;
                 text-align: center;
-                font-size: 20px;
+                font-size: 22px;
                 border-bottom: 1px solid #333;
+                box-shadow: 0 2px rgba(0,0,0,0.4)
+            }
+            #chat-container {
+                background: #1a1a1a;
+                border-radius: 12px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.4);
+                padding: 20px;
+                margin-top: 20px;
+                height: 70vh;
+                width: 100%;
+                max-width: 600px;
+                display: flex;
+                flex-direction: column;
+            }
+            .chat {
+                display: flex;
+                margin: 10px 0;
+                animation: fadeIn 0.25s ease-out;
+            }
+
+
+
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(4px); }
+                to { opacity: 1; transform: translateY(0); }
             }
         </style>
     </head>
+
     <body>
+
         <header>RudeBot Web</header>
 
-        <h1>RudeBot Web</h1>
+        <div id="chat-container">
 
-        <div id="log"></div>
-        <div id="input-container">
-            <input id="msg" placeholder="Say something..." autocomplete="off">
+            <div id="log"></div>
+            <div id="input-container">
+                <input id="msg" placeholder="Say something..." autocomplete="off">
+            </div>
         </div>
         <script>
             const backend = "https://rude-backend.onrender.com/chat";
